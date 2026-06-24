@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>狗屎地图</title>
+  <link rel="stylesheet" href="static/css/style.css?v=5">
+  <!-- 高德地图 JS API -->
+  <script src="https://webapi.amap.com/maps?v=2.0&key=780b297bc9a84b5758954e9557366d63&jscode=d14a8f7b6c9dc5d816689ceaf87b757a"></script>
+</head>
+<body>
+  <!-- 地图容器 -->
+  <div id="map-container"></div>
+
+  <!-- 悬浮按钮组 -->
+  <div class="fab-group">
+    <!-- 特工按钮 -->
+    <button class="fab fab-agent" id="fab-agent" aria-label="特工档案">
+      <img src="static/assets/agent-btn.png" alt="🕵️" class="agent-icon-img">
+    </button>
+    <!-- 标记按钮 -->
+    <button class="fab fab-mark" id="fab-mark" aria-label="标记狗屎">
+      <img src="static/assets/poop-marker.png" alt="💩">
+    </button>
+    <!-- 榜单按钮 -->
+    <button class="fab fab-ranking" id="fab-ranking" aria-label="查看榜单">
+      <img src="static/assets/trophy.png" alt="🏆">
+    </button>
+  </div>
+
+  <!-- 排行榜弹窗 -->
+  <div class="modal" id="modal-ranking">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><img src="static/assets/trophy.png" alt="🏆" style="width:28px;height:28px;vertical-align:middle;margin-right:6px;">全国狗屎产量榜</h2>
+        <button class="modal-close" aria-label="关闭">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="ranking-list"></div>
+        <div style="text-align:center;padding:16px;color:var(--color-text-muted);font-size:12px;">
+          <img src="static/assets/trophy.png" alt="🏆" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;">数据每周一 00:00 刷新
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 特工身份弹窗 -->
+  <div class="modal" id="modal-agent">
+    <div class="modal-overlay"></div>
+    <div class="modal-content agent-card-outer">
+      <!-- 透明塑料外壳 -->
+      <div class="plastic-case">
+        <!-- 内层卡片内容 -->
+        <div class="agent-card-inner">
+          <button class="modal-close modal-close-absolute" aria-label="关闭">&times;</button>
+          <div class="agent-card-header">
+            <h2>IDSI 特工档案</h2>
+            <p>International Dog Shit Investigation · 国际狗屎调查局</p>
+          </div>
+          <div class="agent-card-body">
+            <div class="agent-avatar-section">
+              <div class="agent-avatar-bg"></div>
+              <div class="agent-avatar-center">
+                <div class="agent-avatar-circle">
+                  <img class="agent-avatar-img" id="agent-avatar-img" src="" alt="特工头像">
+                </div>
+              </div>
+              <img class="agent-poop-deco" src="static/assets/poop-newspaper.jpg" alt="📰" onclick="App.showWeeklyReport()" title="查看狗屎周报">
+            </div>
+            <div class="agent-info-section" id="agent-profile"></div>
+            <div class="agent-marks-section" id="agent-marks"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 升级卡片 -->
+  <div class="level-up-card" id="level-up-card">
+    <div class="level-up-content">
+      <div class="level-up-inner">
+        <div class="level-up-badge" id="level-up-badge"></div>
+        <div class="level-up-title">恭喜升级！</div>
+        <div class="level-up-rank" id="level-up-rank"></div>
+        <div class="level-up-stats" id="level-up-stats"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 狗屎周报弹窗 -->
+  <div class="weekly-report-modal" id="weekly-report-modal">
+    <div class="weekly-report-content">
+      <div class="weekly-report-header">
+        <span class="weekly-report-icon">📰</span>
+        <h2>狗屎周报</h2>
+        <button class="weekly-report-close" onclick="App.closeWeeklyReport()">✕</button>
+      </div>
+      <div class="weekly-report-body" id="weekly-report-body">
+        <!-- 动态生成 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 新手引导 -->
+  <div class="guide-overlay" id="guide-overlay">
+    <div class="guide-highlight" id="guide-highlight"></div>
+    <div class="guide-bubble-wrapper" id="guide-bubble-wrapper">
+      <div class="guide-bubble" id="guide-bubble">
+        <div class="guide-bubble-content" id="guide-bubble-content"></div>
+        <div class="guide-bubble-arrow" id="guide-bubble-arrow"></div>
+        <div class="guide-bubble-actions" id="guide-bubble-actions"></div>
+      </div>
+      <button class="guide-skip" id="guide-skip" onclick="App._endGuide()">跳过引导</button>
+    </div>
+  </div>
+
+  <!-- 引入 JS 文件 -->
+  <script src="static/js/data.js?v=33"></script>
+  <script src="static/js/agent.js?v=34"></script>
+  <script src="static/js/map.js?v=33"></script>
+  <script src="static/js/ranking.js?v=33"></script>
+  <script src="static/js/app.js?v=35"></script>
+</body>
+</html>
